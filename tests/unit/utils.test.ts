@@ -57,15 +57,15 @@ describe('Utils', () => {
 
       debouncedFn('arg1');
       jest.advanceTimersByTime(50);
-      
+
       debouncedFn('arg2');
       jest.advanceTimersByTime(50);
-      
+
       // Should not be called yet
       expect(mockFn).not.toHaveBeenCalled();
-      
+
       jest.advanceTimersByTime(50);
-      
+
       // Should be called with last arguments
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith('arg2');
@@ -90,7 +90,7 @@ describe('Utils', () => {
       };
 
       const result = validateSettings(invalidSettings);
-      
+
       expect(result.ld_enabled).toBe(DEFAULT_SETTINGS.ld_enabled);
       expect(result.ld_intensity).toBe(DEFAULT_SETTINGS.ld_intensity);
       expect(result.ld_color).toBe(DEFAULT_SETTINGS.ld_color);
@@ -109,7 +109,7 @@ describe('Utils', () => {
       };
 
       const result = validateSettings(validSettings);
-      
+
       expect(result.ld_enabled).toBe(false);
       expect(result.ld_intensity).toBe(0.8);
       expect(result.ld_color).toBe('#ff0000');

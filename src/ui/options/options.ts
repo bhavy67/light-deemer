@@ -32,14 +32,26 @@ async function init(): Promise<void> {
   try {
     // Get DOM elements
     elements = {
-      defaultIntensity: document.getElementById('default-intensity') as HTMLInputElement,
-      intensityDisplay: document.getElementById('intensity-display') as HTMLElement,
-      defaultColor: document.getElementById('default-color') as HTMLInputElement,
+      defaultIntensity: document.getElementById(
+        'default-intensity'
+      ) as HTMLInputElement,
+      intensityDisplay: document.getElementById(
+        'intensity-display'
+      ) as HTMLElement,
+      defaultColor: document.getElementById(
+        'default-color'
+      ) as HTMLInputElement,
       colorCode: document.getElementById('color-code') as HTMLElement,
       colorPreview: document.getElementById('color-preview') as HTMLElement,
-      overlayModeBtn: document.querySelector('[data-mode="overlay"]') as HTMLButtonElement,
-      filterModeBtn: document.querySelector('[data-mode="filter"]') as HTMLButtonElement,
-      excludeVideos: document.getElementById('exclude-videos') as HTMLInputElement,
+      overlayModeBtn: document.querySelector(
+        '[data-mode="overlay"]'
+      ) as HTMLButtonElement,
+      filterModeBtn: document.querySelector(
+        '[data-mode="filter"]'
+      ) as HTMLButtonElement,
+      excludeVideos: document.getElementById(
+        'exclude-videos'
+      ) as HTMLInputElement,
       resetBtn: document.getElementById('reset-settings') as HTMLButtonElement,
       statusMessage: document.getElementById('status-message') as HTMLElement,
     };
@@ -88,11 +100,11 @@ async function saveSettings(): Promise<void> {
   try {
     const storage = await getStorageApi();
     await storage.set(currentSettings);
-    
+
     // Notify background script
     chrome.runtime.sendMessage({
       action: 'settingsChanged',
-      settings: currentSettings
+      settings: currentSettings,
     });
 
     showStatus('Settings saved successfully!', 'success');
@@ -107,7 +119,7 @@ async function saveSettings(): Promise<void> {
  */
 function setupEventListeners(): void {
   // Intensity slider
-  elements.defaultIntensity.addEventListener('input', (e) => {
+  elements.defaultIntensity.addEventListener('input', e => {
     const target = e.target as HTMLInputElement;
     const value = parseInt(target.value) / 100;
     currentSettings.ld_intensity = value;
@@ -116,7 +128,7 @@ function setupEventListeners(): void {
   });
 
   // Color picker
-  elements.defaultColor.addEventListener('input', (e) => {
+  elements.defaultColor.addEventListener('input', e => {
     const target = e.target as HTMLInputElement;
     currentSettings.ld_color = target.value;
     updateColorDisplay();
@@ -133,7 +145,7 @@ function setupEventListeners(): void {
   });
 
   // Exclude videos toggle
-  elements.excludeVideos.addEventListener('change', (e) => {
+  elements.excludeVideos.addEventListener('change', e => {
     const target = e.target as HTMLInputElement;
     currentSettings.ld_excludeVideos = target.checked;
     saveSettings();
@@ -150,7 +162,9 @@ function setupEventListeners(): void {
  */
 function updateUI(): void {
   // Update intensity
-  elements.defaultIntensity.value = Math.round(currentSettings.ld_intensity * 100).toString();
+  elements.defaultIntensity.value = Math.round(
+    currentSettings.ld_intensity * 100
+  ).toString();
   updateIntensityDisplay();
 
   // Update color
@@ -194,8 +208,14 @@ function setMode(mode: 'overlay' | 'filter'): void {
  * Update mode button styles
  */
 function updateModeButtons(): void {
-  elements.overlayModeBtn.classList.toggle('active', currentSettings.ld_mode === 'overlay');
-  elements.filterModeBtn.classList.toggle('active', currentSettings.ld_mode === 'filter');
+  elements.overlayModeBtn.classList.toggle(
+    'active',
+    currentSettings.ld_mode === 'overlay'
+  );
+  elements.filterModeBtn.classList.toggle(
+    'active',
+    currentSettings.ld_mode === 'filter'
+  );
 }
 
 /**
@@ -219,7 +239,7 @@ async function resetToDefaults(): Promise<void> {
 function showStatus(message: string, type: 'success' | 'error'): void {
   elements.statusMessage.textContent = message;
   elements.statusMessage.className = `toast ${type} show`;
-  
+
   setTimeout(() => {
     elements.statusMessage.classList.remove('show');
   }, 3000);

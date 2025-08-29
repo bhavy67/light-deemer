@@ -9,6 +9,7 @@
     "clean": "rm -rf dist",
     "lint": "eslint --ext .ts,.tsx src/ --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,html}\" \"tests/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,html}\" \"tests/**/*.{ts,tsx}\"",
     "test": "jest",
     "test:e2e": "jest --config jest.e2e.config.js",
     "zip": "./scripts/package.sh",

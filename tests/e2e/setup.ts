@@ -14,7 +14,7 @@ declare global {
 beforeAll(async () => {
   // Launch browser with extension loaded
   const extensionPath = path.resolve(__dirname, '../../dist');
-  
+
   global.browser = await puppeteer.launch({
     headless: false, // Need to see the extension UI for some tests
     args: [
@@ -30,9 +30,11 @@ beforeAll(async () => {
   // Get extension ID
   const targets = await global.browser.targets();
   const extensionTarget = targets.find(
-    target => target.type() === 'service_worker' && target.url().includes('chrome-extension://')
+    target =>
+      target.type() === 'service_worker' &&
+      target.url().includes('chrome-extension://')
   );
-  
+
   if (extensionTarget) {
     const extensionUrl = extensionTarget.url();
     const urlParts = extensionUrl.split('chrome-extension://')[1]?.split('/');

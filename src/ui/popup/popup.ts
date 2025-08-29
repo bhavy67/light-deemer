@@ -35,18 +35,28 @@ async function init(): Promise<void> {
   try {
     // Get DOM elements
     elements = {
-      enabledToggle: document.getElementById('enabled-toggle') as HTMLInputElement,
+      enabledToggle: document.getElementById(
+        'enabled-toggle'
+      ) as HTMLInputElement,
       statusText: document.getElementById('status-text') as HTMLElement,
-      statusDescription: document.getElementById('status-description') as HTMLElement,
+      statusDescription: document.getElementById(
+        'status-description'
+      ) as HTMLElement,
       controls: document.getElementById('controls') as HTMLElement,
-      intensitySlider: document.getElementById('intensity-slider') as HTMLInputElement,
+      intensitySlider: document.getElementById(
+        'intensity-slider'
+      ) as HTMLInputElement,
       intensityValue: document.getElementById('intensity-value') as HTMLElement,
       colorPicker: document.getElementById('color-picker') as HTMLInputElement,
       colorPreview: document.getElementById('color-preview') as HTMLElement,
       colorCode: document.getElementById('color-code') as HTMLElement,
-      excludeVideos: document.getElementById('exclude-videos') as HTMLInputElement,
+      excludeVideos: document.getElementById(
+        'exclude-videos'
+      ) as HTMLInputElement,
       currentSite: document.getElementById('current-site') as HTMLElement,
-      openSettings: document.getElementById('open-settings') as HTMLButtonElement,
+      openSettings: document.getElementById(
+        'open-settings'
+      ) as HTMLButtonElement,
       statusMessage: document.getElementById('status-message') as HTMLElement,
     };
 
@@ -81,7 +91,10 @@ async function init(): Promise<void> {
  */
 async function getCurrentHostname(): Promise<void> {
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
     if (tab?.url) {
       const url = new URL(tab.url);
       currentHostname = url.hostname;
@@ -99,7 +112,9 @@ async function getCurrentHostname(): Promise<void> {
  */
 async function loadSettings(): Promise<void> {
   try {
-    const response = await chrome.runtime.sendMessage({ action: 'getSettings' });
+    const response = await chrome.runtime.sendMessage({
+      action: 'getSettings',
+    });
     if (response?.settings) {
       currentSettings = validateSettings(response.settings);
     }
@@ -116,7 +131,7 @@ async function saveSettings(): Promise<void> {
   try {
     await chrome.runtime.sendMessage({
       action: 'updateSettings',
-      settings: currentSettings
+      settings: currentSettings,
     });
   } catch (error) {
     console.error('[LightDeemer] Error saving settings:', error);
@@ -128,7 +143,7 @@ async function saveSettings(): Promise<void> {
  */
 function setupEventListeners(): void {
   // Master toggle
-  elements.enabledToggle.addEventListener('change', (e) => {
+  elements.enabledToggle.addEventListener('change', e => {
     const target = e.target as HTMLInputElement;
     currentSettings.ld_enabled = target.checked;
     updateUI();
@@ -137,7 +152,7 @@ function setupEventListeners(): void {
   });
 
   // Intensity slider
-  elements.intensitySlider.addEventListener('input', (e) => {
+  elements.intensitySlider.addEventListener('input', e => {
     const target = e.target as HTMLInputElement;
     const value = parseInt(target.value) / 100;
     currentSettings.ld_intensity = value;
@@ -147,7 +162,7 @@ function setupEventListeners(): void {
   });
 
   // Color picker
-  elements.colorPicker.addEventListener('input', (e) => {
+  elements.colorPicker.addEventListener('input', e => {
     const target = e.target as HTMLInputElement;
     currentSettings.ld_color = target.value;
     updateColorDisplay();
@@ -156,7 +171,7 @@ function setupEventListeners(): void {
   });
 
   // Exclude videos toggle
-  elements.excludeVideos.addEventListener('change', (e) => {
+  elements.excludeVideos.addEventListener('change', e => {
     const target = e.target as HTMLInputElement;
     currentSettings.ld_excludeVideos = target.checked;
     saveSettings();
@@ -175,21 +190,23 @@ function setupEventListeners(): void {
  */
 function updateUI(): void {
   const isEnabled = currentSettings.ld_enabled;
-  
+
   // Update master toggle
   elements.enabledToggle.checked = isEnabled;
-  
+
   // Update status text
   elements.statusText.textContent = isEnabled ? 'Active' : 'Inactive';
-  elements.statusDescription.textContent = isEnabled 
-    ? 'Protecting your eyes' 
+  elements.statusDescription.textContent = isEnabled
+    ? 'Protecting your eyes'
     : 'Click to enable protection';
 
   // Update controls visibility
   elements.controls.classList.toggle('disabled', !isEnabled);
 
   // Update intensity
-  elements.intensitySlider.value = Math.round(currentSettings.ld_intensity * 100).toString();
+  elements.intensitySlider.value = Math.round(
+    currentSettings.ld_intensity * 100
+  ).toString();
   updateIntensityDisplay();
 
   // Update color
@@ -221,14 +238,16 @@ function updateColorDisplay(): void {
  * Send message to content script
  */
 function sendContentScriptMessage(): void {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     if (tabs[0]?.id) {
-      chrome.tabs.sendMessage(tabs[0].id, {
-        action: 'settingsReset',
-        settings: currentSettings
-      }).catch(() => {
-        // Content script might not be loaded, ignore error
-      });
+      chrome.tabs
+        .sendMessage(tabs[0].id, {
+          action: 'settingsReset',
+          settings: currentSettings,
+        })
+        .catch(() => {
+          // Content script might not be loaded, ignore error
+        });
     }
   });
 }

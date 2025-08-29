@@ -38,9 +38,12 @@ let debugMode = false;
 function init(): void {
   try {
     console.log('[LightDeemer] Starting initialization...');
-    
+
     if (isRestrictedPage()) {
-      console.log('[LightDeemer] Skipping restricted page:', window.location.href);
+      console.log(
+        '[LightDeemer] Skipping restricted page:',
+        window.location.href
+      );
       return;
     }
 
@@ -70,13 +73,13 @@ function init(): void {
 async function loadSettingsAndApply(): Promise<void> {
   try {
     console.log('[LightDeemer] Loading settings from background script...');
-    
+
     const response = await chrome.runtime.sendMessage({
       action: 'getSettings',
     });
-    
+
     console.log('[LightDeemer] Background response:', response);
-    
+
     if (response && response.settings) {
       currentSettings = validateSettings(response.settings);
       debugMode = currentSettings.ld_debug;
@@ -205,7 +208,7 @@ function applyOverlay(): void {
       isWhitelisted,
       isFullscreen,
       intensity: currentSettings.ld_intensity,
-      shouldShow
+      shouldShow,
     });
 
     if (shouldShow) {
@@ -232,7 +235,7 @@ function applyOverlay(): void {
 function createOrUpdateOverlay(): void {
   try {
     console.log('[LightDeemer] Creating/updating overlay element...');
-    
+
     if (!overlayElement) {
       overlayElement = document.createElement('div');
       overlayElement.id = OVERLAY_ID;
@@ -244,7 +247,9 @@ function createOrUpdateOverlay(): void {
         targetElement.appendChild(overlayElement);
         console.log('[LightDeemer] Overlay element created and appended');
       } else {
-        console.error('[LightDeemer] Could not find target element for overlay');
+        console.error(
+          '[LightDeemer] Could not find target element for overlay'
+        );
         return;
       }
     }
