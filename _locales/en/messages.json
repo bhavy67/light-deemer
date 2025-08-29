@@ -1,0 +1,68 @@
+{
+  "extensionName": {
+    "message": "Light Deemer"
+  },
+  "extensionDescription": {
+    "message": "Dims harsh white/light areas on webpages to reduce eye strain"
+  },
+  "enabledLabel": {
+    "message": "Enable Light Deemer"
+  },
+  "intensityLabel": {
+    "message": "Dimming Intensity"
+  },
+  "colorLabel": {
+    "message": "Overlay Color"
+  },
+  "excludeVideosLabel": {
+    "message": "Exclude videos from dimming"
+  },
+  "currentSiteLabel": {
+    "message": "Current site"
+  },
+  "addToWhitelist": {
+    "message": "Add to whitelist"
+  },
+  "removeFromWhitelist": {
+    "message": "Remove from whitelist"
+  },
+  "moreOptions": {
+    "message": "More Options"
+  },
+  "generalSettings": {
+    "message": "General Settings"
+  },
+  "websiteWhitelist": {
+    "message": "Website Whitelist"
+  },
+  "perDomainSettings": {
+    "message": "Per-Domain Settings"
+  },
+  "advancedSettings": {
+    "message": "Advanced Settings"
+  },
+  "resetSettings": {
+    "message": "Reset Settings"
+  },
+  "debugMode": {
+    "message": "Enable debug mode"
+  },
+  "resetAllSettings": {
+    "message": "Reset All Settings"
+  },
+  "confirmReset": {
+    "message": "This will reset all settings to their default values. This action cannot be undone."
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "confirm": {
+    "message": "Confirm"
+  },
+  "privacyPolicy": {
+    "message": "Privacy Policy"
+  },
+  "support": {
+    "message": "Support"
+  }
+}
