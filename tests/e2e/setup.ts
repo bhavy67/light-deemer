@@ -16,7 +16,7 @@ beforeAll(async () => {
   const extensionPath = path.resolve(__dirname, '../../dist');
 
   global.browser = await puppeteer.launch({
-    headless: process.env.CI === 'true', // Use headless mode in CI
+    headless: process.env['CI'] === 'true', // Use headless mode in CI
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
