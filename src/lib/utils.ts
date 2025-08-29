@@ -17,7 +17,7 @@ export interface LightDeemerSettings {
 }
 
 export const DEFAULT_SETTINGS: LightDeemerSettings = {
-  ld_enabled: true,
+  ld_enabled: false, // Start disabled by default for better UX
   ld_intensity: 0.25,
   ld_color: '#000000',
   ld_excludeVideos: true,
