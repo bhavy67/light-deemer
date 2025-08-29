@@ -1,0 +1,43 @@
+
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FEF3C7;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FCD34D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="filterGradient" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#374151;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#1F2937;stop-opacity:0.7" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="64" cy="64" r="62" fill="#F9FAFB"/>
+  
+  <!-- Sun rays -->
+  <g stroke="url(#sunGradient)" stroke-width="3" stroke-linecap="round">
+    <line x1="64" y1="15" x2="64" y2="25"/>
+    <line x1="90.5" y1="25.5" x2="86.5" y2="29.5"/>
+    <line x1="113" y1="64" x2="103" y2="64"/>
+    <line x1="90.5" y1="102.5" x2="86.5" y2="98.5"/>
+    <line x1="64" y1="113" x2="64" y2="103"/>
+    <line x1="37.5" y1="102.5" x2="41.5" y2="98.5"/>
+    <line x1="15" y1="64" x2="25" y2="64"/>
+    <line x1="37.5" y1="25.5" x2="41.5" y2="29.5"/>
+  </g>
+  
+  <!-- Sun body -->
+  <circle cx="64" cy="64" r="20" fill="url(#sunGradient)"/>
+  
+  <!-- Dimming filter overlay -->
+  <circle cx="64" cy="64" r="35" fill="url(#filterGradient)"/>
+  
+  <!-- Checkmark or shield symbol -->
+  <path d="M 55 64 L 61 70 L 75 56" 
+        stroke="#10B981" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+</svg>

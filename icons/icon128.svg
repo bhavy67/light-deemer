@@ -1,0 +1,40 @@
+
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient definitions -->
+  <defs>
+    <radialGradient id="eyeGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="overlayGradient" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:0.6" />
+    </radialGradient>
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:0.7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle for contrast -->
+  <circle cx="64" cy="64" r="62" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  
+  <!-- Eye shape -->
+  <ellipse cx="64" cy="64" rx="45" ry="25" fill="none" stroke="url(#eyeGradient)" stroke-width="4"/>
+  
+  <!-- Pupil -->
+  <circle cx="64" cy="64" r="12" fill="url(#eyeGradient)"/>
+  
+  <!-- Eye highlight -->
+  <circle cx="68" cy="60" r="4" fill="#FFFFFF" opacity="0.9"/>
+  
+  <!-- Protective overlay (curved shield over eye) -->
+  <path d="M 25 45 Q 64 25 103 45 Q 95 75 64 85 Q 33 75 25 45 Z" 
+        fill="url(#overlayGradient)" 
+        opacity="0.8"/>
+  
+  <!-- Subtle shine effect on overlay -->
+  <path d="M 35 50 Q 64 35 85 48 Q 80 60 64 65 Q 48 60 35 50 Z" 
+        fill="#FFFFFF" 
+        opacity="0.2"/>
+</svg>

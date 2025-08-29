@@ -16,7 +16,7 @@ beforeAll(async () => {
   const extensionPath = path.resolve(__dirname, '../../dist');
 
   global.browser = await puppeteer.launch({
-    headless: false, // Need to see the extension UI for some tests
+    headless: process.env.CI === 'true', // Use headless mode in CI
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
@@ -24,6 +24,8 @@ beforeAll(async () => {
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
       '--disable-web-security',
+      '--disable-gpu',
+      '--virtual-time-budget=5000',
     ],
   });
 
